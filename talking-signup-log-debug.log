@@ -1,0 +1,143 @@
+[s6-init] making user provided files available at /var/run/s6/etc...exited 0.
+[s6-init] ensuring user provided files have correct perms...exited 0.
+[fix-attrs.d] applying ownership & permissions fixes...
+[fix-attrs.d] 01-fix-perms: applying... 
+[fix-attrs.d] 01-fix-perms: exited 0.
+[fix-attrs.d] done.
+[cont-init.d] executing container initialization scripts...
+[cont-init.d] done.
+[services.d] starting services
+[services.d] done.
+Listening 0.0.0.0 on port 9000...
+2018/04/13 07:57:57 Error in loading .env file
+time="2018-04-13T07:57:57Z" level=info msg="Starting Skygear Server(v1.4.0)..."
+time="2018-04-13T07:57:57Z" level=debug msg="Current version of database schema is \"b3163d49bd6d\"." logger=skydb
+time="2018-04-13T07:57:57Z" level=debug msg="Database schema \"b3163d49bd6d\" matches the latest schema \"b3163d49bd6d\"." logger=skydb
+time="2018-04-13T07:57:57Z" level=debug msg="Querying remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:57:57Z" level=debug msg="Executed SQL with sql.QueryRowx" args="[user app_cheungpatapplog]" executionCount=1 logger=skydb sql="\nSELECT c.oid\nFROM pg_catalog.pg_class c\n     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace\nWHERE c.relname = $1\n  AND n.nspname = $2"
+time="2018-04-13T07:57:57Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[35455312]" error="<nil>" executionCount=2 logger=skydb sql="\nSELECT a.attname,\n  pg_catalog.format_type(a.atttypid, a.atttypmod)\nFROM pg_catalog.pg_attribute a\nWHERE a.attrelid = $1 AND a.attnum > 0 AND NOT a.attisdropped"
+time="2018-04-13T07:57:57Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[app_cheungpatapplog user]" error="<nil>" executionCount=3 logger=skydb sql="SELECT kcu.column_name, ccu.table_name FROM information_schema.table_constraints AS tc JOIN information_schema.key_column_usage AS kcu ON tc.constraint_name = kcu.constraint_name JOIN information_schema.constraint_column_usage AS ccu ON ccu.constraint_name = tc.constraint_name WHERE constraint_type = 'FOREIGN KEY' AND tc.table_schema = $1 AND tc.table_name = $2"
+time="2018-04-13T07:57:57Z" level=debug msg="Cache remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:57:57Z" level=debug msg="Using cached remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:57:57Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[app_cheungpatapplog user]" error="<nil>" executionCount=4 logger=skydb sql="\nSELECT\n    t.relname AS table_name,\n    i.relname AS index_name,\n    array_to_string(array_agg(a.attname), ',') AS column_names\nFROM\n    pg_class t,\n    pg_class i,\n    pg_index ix,\n    pg_attribute a,\n    pg_namespace ns\nWHERE\n    t.oid = ix.indrelid\n    AND i.oid = ix.indexrelid\n    AND ns.oid = t.relnamespace\n    AND ns.oid = i.relnamespace\n    AND a.attrelid = t.oid\n    AND a.attnum = ANY(ix.indkey)\n    AND t.relkind = 'r'\n    AND ix.indisunique = TRUE\n    AND ns.nspname = $1\n    AND t.relname = $2\nGROUP BY\n    ns.nspname,\n    t.relname,\n    i.relname;"
+time="2018-04-13T07:57:57Z" level=info msg="Subscription Service listening..."
+time="2018-04-13T07:57:57Z" level=debug msg="Executed SQL successfully with sql.Exec" args="[2018-04-12 07:57:57.79591966 +0000 UTC]" error="<nil>" executionCount=1 logger=skydb rowsAffected=0 sql="DELETE FROM \"app_cheungpatapplog\".\"_device\" WHERE token IS NULL AND last_registered_at < $1"
+time="2018-04-13T07:57:57Z" level=info msg="Created Cloud Asset Store" cloud-store="&{cheungpatapplog http://10.3.148.74 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRyYSI6eyJlbmRwb2ludCI6ImNoZXVuZ3BhdGFwcGxvZyJ9LCJqdGkiOiI4OTMxYjNlMy02MWZjLTQ4MWMtOGQzNi1jYTY1YWUyYWQyN2EiLCJpYXQiOjE1MjM2MDYyNzQsImlzcyI6IlNreWdlYXItQ2xvdWQiLCJzdWIiOiJza3lnZWFyLWNsb3VkLWFzc2V0LXRva2VuIn0.2fCZ19ehNTxBdWqFoHrOW39LOLKgwWszrWerogtByJ8 https://asset.skygeario.com/asset false 0xc42019d130}" logger=asset
+time="2018-04-13T07:57:57Z" level=info msg="Start refresh Cloud Asset Signer Token" logger=asset
+time="2018-04-13T07:57:57Z" level=debug msg="Hub running 0xc420224b80" logger=pubsub
+time="2018-04-13T07:57:57Z" level=info msg="Successfully got new Cloud Asset Signer Token" logger=asset response="{1tnZSeP29auY3Ynvv17atNse9Ks7eYTw7yHXDm5NBdk= MTUyMzYxMzQ3Nw== 2018-04-13 09:57:57 +0000 UTC}"
+time="2018-04-13T07:57:57Z" level=debug msg="Hub running 0xc42005a680" logger=pubsub
+time="2018-04-13T07:57:57Z" level=info msg="Supported plugin transports: exec, http"
+time="2018-04-13T07:57:57Z" level=info msg="Listening on :3000..."
+time="2018-04-13T07:57:57Z" level=info msg="Wait for all plugin configurations" count=2 logger=plugin
+time="2018-04-13T07:57:57Z" level=info msg="pq/listener: Received an event" event=0 logger=skydb
+time="2018-04-13T07:57:57Z" level=info msg="pq/listener: Listening to record_change..." logger=skydb
+time="2018-04-13T07:57:57Z" level=info msg="Sending init event to plugin" logger=plugin retry=0
+time="2018-04-13T07:57:57Z" level=info msg="Get response from init" err="Post http://localhost:8000: dial tcp 127.0.0.1:8000: getsockopt: connection refused" logger=plugin out= plugin="&{0 0xc42008a900 map[]}"
+time="2018-04-13T07:57:57Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateError." logger=plugin
+time="2018-04-13T07:57:57Z" level=info msg="Sending init event to plugin" logger=plugin retry=0
+time="2018-04-13T07:57:57Z" level=info msg="Get response from init" err="<nil>" logger=plugin out="{\"op\":[],\"event\":[{\"name\":\"init\"}],\"handler\":[{\"name\":\"static/\",\"methods\":[\"GET\"],\"user_required\":false},{\"name\":\"static/\",\"methods\":[\"POST\"],\"user_required\":false},{\"name\":\"static/\",\"methods\":[\"PUT\"],\"user_required\":false}],\"hook\":[],\"timer\":[],\"provider\":[]}" plugin="&{0 0xc42008bb00 map[]}"
+time="2018-04-13T07:57:57Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateInitialized." logger=plugin
+2018-04-13 07:57:58,279 INFO  [skygear.bin:76][MainThread] Starting py-skygear(1.4.0)...
+2018-04-13 07:57:58,471 INFO  [werkzeug:88][MainThread]  * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
+time="2018-04-13T07:57:59Z" level=info msg="Sending init event to plugin" logger=plugin retry=1
+time="2018-04-13T07:57:59Z" level=info msg="Transport state changes from TransportStateError to TransportStateUninitialized." logger=plugin
+2018-04-13 07:58:00,065 INFO  [werkzeug:88][Thread-1] 127.0.0.1 - - [13/Apr/2018 07:58:00] "POST / HTTP/1.1" 200 -
+time="2018-04-13T07:58:00Z" level=info msg="Get response from init" err="<nil>" logger=plugin out="{\"op\": [{\"name\": \"user:forgot-password\", \"key_required\": false, \"user_required\": false}, {\"name\": \"user:forgot-password:test\", \"key_required\": true, \"user_required\": false}, {\"name\": \"user:reset-password\", \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/config\", \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/provider_profiles\", \"key_required\": false, \"user_required\": true}], \"handler\": [{\"name\": \"reset-password\", \"methods\": [\"GET\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"reset-password\", \"methods\": [\"POST\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"GET\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"POST\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"PUT\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"hello/\", \"methods\": [\"GET\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"hello/\", \"methods\": [\"POST\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"hello/\", \"methods\": [\"PUT\"], \"key_required\": false, \"user_required\": false}], \"hook\": [{\"type\": \"user\", \"trigger\": \"beforeSave\", \"name\": \"plugin.check_out_user\"}], \"timer\": [], \"event\": [{\"name\": \"init\"}], \"provider\": []}" plugin="&{1 0xc42008a900 map[]}"
+time="2018-04-13T07:58:00Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateInitialized." logger=plugin
+2018-04-13 07:58:00,188 WARNI [skygear.transmitter.common:114][Thread-2] Missing event func named "after-config"
+2018-04-13 07:58:00,188 INFO  [werkzeug:88][Thread-2] 127.0.0.1 - - [13/Apr/2018 07:58:00] "POST / HTTP/1.1" 200 -
+2018-04-13 07:58:00,218 WARNI [skygear.transmitter.common:114][Thread-3] Missing event func named "before-plugins-ready"
+2018-04-13 07:58:00,218 INFO  [werkzeug:88][Thread-3] 127.0.0.1 - - [13/Apr/2018 07:58:00] "POST / HTTP/1.1" 200 -
+time="2018-04-13T07:58:00Z" level=info msg="Transport state changes from TransportStateInitialized to TransportStateReady." logger=plugin
+time="2018-04-13T07:58:00Z" level=info msg="Transport state changes from TransportStateInitialized to TransportStateReady." logger=plugin
+2018-04-13 07:58:00,247 WARNI [skygear.transmitter.common:114][Thread-4] Missing event func named "after-plugins-ready"
+2018-04-13 07:58:00,247 INFO  [werkzeug:88][Thread-4] 127.0.0.1 - - [13/Apr/2018 07:58:00] "POST / HTTP/1.1" 200 -
+2018-04-13 07:58:00,285 WARNI [skygear.transmitter.common:114][Thread-5] Missing event func named "server-ready"
+2018-04-13 07:58:00,285 INFO  [werkzeug:88][Thread-5] 127.0.0.1 - - [13/Apr/2018 07:58:00] "POST / HTTP/1.1" 200 -
+time="2018-04-13T07:58:16Z" level=debug msg="GET /_status/healthz" logger=router
+time="2018-04-13T07:58:16Z" level=debug msg="------ Header: ------" logger=router
+time="2018-04-13T07:58:16Z" level=debug msg="User-Agent: [kube-probe/1.9]" logger=router
+time="2018-04-13T07:58:16Z" level=debug msg="Accept-Encoding: [gzip]" logger=router
+time="2018-04-13T07:58:16Z" level=debug msg="Connection: [close]" logger=router
+time="2018-04-13T07:58:16Z" level=debug msg="------ Request: ------" logger=router
+time="2018-04-13T07:58:16Z" level=debug msg="0 bytes of request body" logger=router
+time="2018-04-13T07:58:16Z" level=debug msg="------ Response: ------" logger=router
+time="2018-04-13T07:58:16Z" level=debug msg="{\"result\":{\"status\":\"OK\"}}\n" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="POST /" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="------ Header: ------" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="User-Agent: [Paw/3.1.5 (Macintosh; OS X/10.13.4) GCDHTTPRequest]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="X-Forwarded-For: [172.24.75.237]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="X-Forwarded-Proto: [http]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="X-Scheme: [http]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="Content-Length: [158]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="Content-Type: [application/json; charset=utf-8]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="Connection: [close]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="X-Real-Ip: [172.24.75.237]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="X-Forwarded-Host: [cheungpatapplog.skygeario.com]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="X-Forwarded-Port: [80]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="X-Original-Uri: [/]" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="------ Request: ------" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="{\"api_key\":\"4bc7ef27d6ab49c380eab9d3760699f4\",\"action\":\"auth:signup\",\"auth_data\":{\"username\":\"cheungpat\",\"email\":\"cheungpat@oursky.com\"},\"password\":\"abc1234\"}" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="Opening DBConn: {pq cheungpatapplog postgresql://dbgftvqyfydiev5s3utku9:aunjaUiNopOE@skygear-cloud-client-db-1.c5fyydwyvna6.us-west-2.rds.amazonaws.com:5432/dbgftvqyfydiev5s3utku9?sslmode=require}" logger=preprocessor
+time="2018-04-13T07:58:31Z" level=debug msg="Get DB OK" logger=preprocessor
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[]" error="<nil>" executionCount=1 logger=skydb sql="SELECT id FROM \"app_cheungpatapplog\".\"_role\" WHERE by_default = true"
+time="2018-04-13T07:58:31Z" level=debug msg="map[email:cheungpat@oursky.com username:cheungpat]"
+time="2018-04-13T07:58:31Z" level=debug msg="Querying remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL with sql.QueryRowx" args="[user app_cheungpatapplog]" executionCount=2 logger=skydb sql="\nSELECT c.oid\nFROM pg_catalog.pg_class c\n     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace\nWHERE c.relname = $1\n  AND n.nspname = $2"
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[35455312]" error="<nil>" executionCount=3 logger=skydb sql="\nSELECT a.attname,\n  pg_catalog.format_type(a.atttypid, a.atttypmod)\nFROM pg_catalog.pg_attribute a\nWHERE a.attrelid = $1 AND a.attnum > 0 AND NOT a.attisdropped"
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[app_cheungpatapplog user]" error="<nil>" executionCount=4 logger=skydb sql="SELECT kcu.column_name, ccu.table_name FROM information_schema.table_constraints AS tc JOIN information_schema.key_column_usage AS kcu ON tc.constraint_name = kcu.constraint_name JOIN information_schema.constraint_column_usage AS ccu ON ccu.constraint_name = tc.constraint_name WHERE constraint_type = 'FOREIGN KEY' AND tc.table_schema = $1 AND tc.table_name = $2"
+time="2018-04-13T07:58:31Z" level=debug msg="Cache remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="0xc420358460: Beginning transaction" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="0xc420358460: Done beginning transaction 0xc42048e1e0" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Exec" args="[acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c [36 50 97 36 49 48 36 121 111 87 108 89 100 88 56 116 102 83 67 56 103 108 122 65 54 86 122 51 46 121 100 102 52 56 77 78 115 113 50 87 89 106 51 68 87 79 70 89 89 120 75 65 103 115 103 99 119 90 122 54] {map[] true} 2018-04-13 07:58:31.781393588 +0000 UTC <nil> false <nil> <nil>]" error="<nil>" executionCount=5 logger=skydb rowsAffected=1 sql="INSERT INTO \"app_cheungpatapplog\".\"_auth\" (id,password,provider_info,token_valid_since,last_seen_at,disabled,disabled_message,disabled_expiry) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)"
+time="2018-04-13T07:58:31Z" level=debug msg="UpdateRoles &{acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c [36 50 97 36 49 48 36 121 111 87 108 89 100 88 56 116 102 83 67 56 103 108 122 65 54 86 122 51 46 121 100 102 52 56 77 78 115 113 50 87 89 106 51 68 87 79 70 89 89 120 75 65 103 115 103 99 119 90 122 54] [] map[] 2018-04-13 07:58:31.781393588 +0000 UTC <nil> true false  <nil>}" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Exec" args="[acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c]" error="<nil>" executionCount=6 logger=skydb rowsAffected=0 sql="DELETE FROM \"app_cheungpatapplog\".\"_auth_role\" WHERE auth_id = $1"
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[]" error="<nil>" executionCount=7 logger=skydb sql="SELECT record_type, record_field, user_role, writable, readable, comparable, discoverable FROM \"app_cheungpatapplog\".\"_record_field_access\""
+time="2018-04-13T07:58:31Z" level=debug msg="Using cached remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL with sql.QueryRowx" args="[ acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c]" executionCount=8 logger=skydb sql="SELECT \"user\".\"_updated_by\" as \"_updated_by\", \"user\".\"_updated_at\" as \"_updated_at\", \"user\".\"email\" as \"email\", \"user\".\"last_login_at\" as \"last_login_at\", \"user\".\"_id\" as \"_id\", \"user\".\"_owner_id\" as \"_owner_id\", \"user\".\"_created_by\" as \"_created_by\", \"user\".\"username\" as \"username\", \"user\".\"_created_at\" as \"_created_at\", \"user\".\"_database_id\" as \"_database_id\", \"user\".\"_access\" as \"_access\" FROM \"app_cheungpatapplog\".\"user\" WHERE \"user\".\"_database_id\" = $1 AND _id = $2"
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[user]" error="<nil>" executionCount=9 logger=skydb sql="SELECT role_id FROM \"app_cheungpatapplog\".\"_record_creation\" JOIN \"app_cheungpatapplog\".\"_role\" ON \"app_cheungpatapplog\".\"_record_creation\".role_id = id WHERE record_type = $1"
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL with sql.QueryRowx" args="[user]" executionCount=10 logger=skydb sql="SELECT default_access FROM \"app_cheungpatapplog\".\"_record_default_access\" WHERE record_type = $1"
+You know, this user seems suspicious.
+Let me check out who this is.
+This user is: cheungpat
+OK, I will let you go through.
+2018-04-13 07:58:31,898 INFO  [werkzeug:88][Thread-6] 127.0.0.1 - - [13/Apr/2018 07:58:31] "POST / HTTP/1.1" 200 -
+time="2018-04-13T07:58:31Z" level=debug msg="Using cached remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL with sql.QueryRowx" args="[acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c  2018-04-13 07:58:31.800496094 +0000 UTC acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c cheungpat cheungpat@oursky.com [] 2018-04-13 07:58:31.800496094 +0000 UTC acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c]" executionCount=11 logger=skydb sql="\n\nWITH updated AS (\n\t\n\t\tUPDATE \"app_cheungpatapplog\".\"user\"\n\t\tSET (\"_updated_at\", \"_updated_by\", \"username\", \"email\", \"_access\") = ($3,$4,$5,$6,$7)\n\t\tWHERE \"_id\" = $1 AND \"_database_id\" = $2\n\t\tRETURNING *\n\t\n), inserted AS (\n\tINSERT INTO \"app_cheungpatapplog\".\"user\"\n\t\t(\"_id\", \"_database_id\", \"_updated_at\", \"_updated_by\", \"username\", \"email\", \"_access\", \"_created_at\", \"_created_by\", \"_owner_id\")\n\tSELECT $1,$2,$3,$4,$5,$6,$7,$8,$9,$10\n\tWHERE NOT EXISTS (SELECT * FROM updated)\n\tRETURNING *\n)\nSELECT \"_created_at\" as \"_created_at\",\"_database_id\" as \"_database_id\",\"_id\" as \"_id\",\"_access\" as \"_access\",\"_updated_at\" as \"_updated_at\",\"email\" as \"email\",\"_updated_by\" as \"_updated_by\",\"last_login_at\" as \"last_login_at\",\"_owner_id\" as \"_owner_id\",\"_created_by\" as \"_created_by\",\"username\" as \"username\" FROM updated\nUNION ALL\nSELECT \"_created_at\" as \"_created_at\",\"_database_id\" as \"_database_id\",\"_id\" as \"_id\",\"_access\" as \"_access\",\"_updated_at\" as \"_updated_at\",\"email\" as \"email\",\"_updated_by\" as \"_updated_by\",\"last_login_at\" as \"last_login_at\",\"_owner_id\" as \"_owner_id\",\"_created_by\" as \"_created_by\",\"username\" as \"username\" FROM inserted;\n"
+time="2018-04-13T07:58:31Z" level=debug msg="Using cached remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="0xc420358460: Committed transaction" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Exec" args="[[36 50 97 36 49 48 36 121 111 87 108 89 100 88 56 116 102 83 67 56 103 108 122 65 54 86 122 51 46 121 100 102 52 56 77 78 115 113 50 87 89 106 51 68 87 79 70 89 89 120 75 65 103 115 103 99 119 90 122 54] {map[] true} 2018-04-13 07:58:31.781393588 +0000 UTC 2018-04-13 07:58:31.914872878 +0000 UTC false <nil> <nil> acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c]" error="<nil>" executionCount=12 logger=skydb rowsAffected=1 sql="UPDATE \"app_cheungpatapplog\".\"_auth\" SET password = $1, provider_info = $2, token_valid_since = $3, last_seen_at = $4, disabled = $5, disabled_message = $6, disabled_expiry = $7 WHERE id = $8"
+time="2018-04-13T07:58:31Z" level=debug msg="UpdateRoles &{acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c [36 50 97 36 49 48 36 121 111 87 108 89 100 88 56 116 102 83 67 56 103 108 122 65 54 86 122 51 46 121 100 102 52 56 77 78 115 113 50 87 89 106 51 68 87 79 70 89 89 120 75 65 103 115 103 99 119 90 122 54] [] map[] 2018-04-13 07:58:31.781393588 +0000 UTC 2018-04-13 07:58:31.914872878 +0000 UTC false false  <nil>}" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL successfully with sql.Exec" args="[acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c]" error="<nil>" executionCount=13 logger=skydb rowsAffected=0 sql="DELETE FROM \"app_cheungpatapplog\".\"_auth_role\" WHERE auth_id = $1"
+time="2018-04-13T07:58:31Z" level=debug msg="Using cached remoteColumnTypes user" logger=skydb
+time="2018-04-13T07:58:31Z" level=debug msg="Executed SQL with sql.QueryRowx" args="[acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c  2018-04-13 07:58:31.914872878 +0000 UTC 2018-04-13 07:58:31.914872878 +0000 UTC acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c cheungpat@oursky.com cheungpat [] acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c 2018-04-13 07:58:31.800496 +0000 UTC acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c]" executionCount=14 logger=skydb sql="\n\nWITH updated AS (\n\t\n\t\tUPDATE \"app_cheungpatapplog\".\"user\"\n\t\tSET (\"last_login_at\", \"_updated_at\", \"_updated_by\", \"email\", \"username\", \"_access\") = ($3,$4,$5,$6,$7,$8)\n\t\tWHERE \"_id\" = $1 AND \"_database_id\" = $2\n\t\tRETURNING *\n\t\n), inserted AS (\n\tINSERT INTO \"app_cheungpatapplog\".\"user\"\n\t\t(\"_id\", \"_database_id\", \"last_login_at\", \"_updated_at\", \"_updated_by\", \"email\", \"username\", \"_access\", \"_owner_id\", \"_created_at\", \"_created_by\")\n\tSELECT $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11\n\tWHERE NOT EXISTS (SELECT * FROM updated)\n\tRETURNING *\n)\nSELECT \"_database_id\" as \"_database_id\",\"_updated_at\" as \"_updated_at\",\"_id\" as \"_id\",\"_owner_id\" as \"_owner_id\",\"_created_by\" as \"_created_by\",\"_access\" as \"_access\",\"email\" as \"email\",\"_created_at\" as \"_created_at\",\"_updated_by\" as \"_updated_by\",\"username\" as \"username\",\"last_login_at\" as \"last_login_at\" FROM updated\nUNION ALL\nSELECT \"_database_id\" as \"_database_id\",\"_updated_at\" as \"_updated_at\",\"_id\" as \"_id\",\"_owner_id\" as \"_owner_id\",\"_created_by\" as \"_created_by\",\"_access\" as \"_access\",\"email\" as \"email\",\"_created_at\" as \"_created_at\",\"_updated_by\" as \"_updated_by\",\"username\" as \"username\",\"last_login_at\" as \"last_login_at\" FROM inserted;\n"
+time="2018-04-13T07:58:31Z" level=debug msg="------ Response: ------" logger=router
+time="2018-04-13T07:58:31Z" level=debug msg="{\"result\":{\"user_id\":\"acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c\",\"profile\":{\"_access\":null,\"_created_at\":\"2018-04-13T07:58:31.800496Z\",\"_created_by\":\"acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c\",\"_id\":\"user/acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c\",\"_ownerID\":\"acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c\",\"_type\":\"record\",\"_updated_at\":\"2018-04-13T07:58:31.800496Z\",\"_updated_by\":\"acf71ee9-76e1-4a6f-becc-a9b8b6f7ef3c\",\"email\":\"cheungpat@oursky.com\",\"username\":\"cheungpat\"},\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZTU5MWU4OS1mMDZkLTRhOWQtODk1ZC00MDYyMDhjNDdiMDIiLCJpYXQiOjE1MjM2MDYzMTEsImlzcyI6ImNoZXVuZ3BhdGFwcGxvZyIsInN1YiI6ImFjZjcxZWU5LTc2ZTEtNGE2Zi1iZWNjLWE5YjhiNmY3ZWYzYyJ9.xl14u1nCelVdSbDPe0YPYUOpC7ZExkIDJ0tjRhK2nHI\"}}\n" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="GET /_status/healthz" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="------ Header: ------" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="User-Agent: [kube-probe/1.9]" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="Accept-Encoding: [gzip]" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="Connection: [close]" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="------ Request: ------" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="0 bytes of request body" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="------ Response: ------" logger=router
+time="2018-04-13T07:58:36Z" level=debug msg="{\"result\":{\"status\":\"OK\"}}\n" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="GET /_status/healthz" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="------ Header: ------" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="User-Agent: [kube-probe/1.9]" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="Accept-Encoding: [gzip]" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="Connection: [close]" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="------ Request: ------" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="0 bytes of request body" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="------ Response: ------" logger=router
+time="2018-04-13T07:58:56Z" level=debug msg="{\"result\":{\"status\":\"OK\"}}\n" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="GET /_status/healthz" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="------ Header: ------" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="User-Agent: [kube-probe/1.9]" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="Accept-Encoding: [gzip]" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="Connection: [close]" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="------ Request: ------" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="0 bytes of request body" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="------ Response: ------" logger=router
+time="2018-04-13T07:59:16Z" level=debug msg="{\"result\":{\"status\":\"OK\"}}\n" logger=router

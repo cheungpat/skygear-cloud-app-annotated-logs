@@ -1,0 +1,56 @@
+[s6-init] making user provided files available at /var/run/s6/etc...exited 0.
+[s6-init] ensuring user provided files have correct perms...exited 0.
+[fix-attrs.d] applying ownership & permissions fixes...
+[fix-attrs.d] 01-fix-perms: applying... 
+[fix-attrs.d] 01-fix-perms: exited 0.
+[fix-attrs.d] done.
+[cont-init.d] executing container initialization scripts...
+[cont-init.d] done.
+[services.d] starting services
+[services.d] done.
+2018/04/13 09:27:16 Error in loading .env file
+time="2018-04-13T09:27:16Z" level=info msg="Wait for all plugin configurations" count=2 logger=plugin
+time="2018-04-13T09:27:16Z" level=info msg="Sending init event to plugin" logger=plugin retry=0
+time="2018-04-13T09:27:16Z" level=info msg="Sending init event to plugin" logger=plugin retry=0
+time="2018-04-13T09:27:16Z" level=info msg="Get response from init" err="Post http://localhost:8000: dial tcp 127.0.0.1:8000: getsockopt: connection refused" logger=plugin out= plugin="&{0 0xc4204d0000 map[]}"
+time="2018-04-13T09:27:16Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateError." logger=plugin
+time="2018-04-13T09:27:16Z" level=info msg="Get response from init" err="Post http://localhost:9000: dial tcp 127.0.0.1:9000: getsockopt: connection refused" logger=plugin out= plugin="&{0 0xc4204d0480 map[]}"
+time="2018-04-13T09:27:16Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateError." logger=plugin
+Listening 0.0.0.0 on port 9000...
+2018-04-13 09:27:17,228 INFO  [skygear.bin:76][MainThread] Starting py-skygear(1.4.0)...
+Traceback (most recent call last):
+  File "/root/.local/bin/py-skygear", line 11, in <module>
+    sys.exit(main())
+  File "/root/.local/lib/python3.6/site-packages/skygear/bin.py", line 38, in main
+    run_plugin(options)
+  File "/root/.local/lib/python3.6/site-packages/skygear/bin.py", line 77, in run_plugin
+    load(options)
+  File "/root/.local/lib/python3.6/site-packages/skygear/bin.py", line 65, in load
+    load_modules(options.modules)
+  File "/root/.local/lib/python3.6/site-packages/skygear/importutil.py", line 118, in load_modules
+    load_module(module)
+  File "/root/.local/lib/python3.6/site-packages/skygear/importutil.py", line 73, in load_module
+    loaded = SourceFileLoader(package_name, path).load_module()
+  File "<frozen importlib._bootstrap_external>", line 399, in _check_name_wrapper
+  File "<frozen importlib._bootstrap_external>", line 823, in load_module
+  File "<frozen importlib._bootstrap_external>", line 682, in load_module
+  File "<frozen importlib._bootstrap>", line 265, in _load_module_shim
+  File "<frozen importlib._bootstrap>", line 684, in _load
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "__init__.py", line 6, in <module>
+    from . import syntaxerror
+  File "/usr/src/app/syntaxerror.py", line 1
+    THIS IS SYNTAX ERROR!!
+          ^
+SyntaxError: invalid syntax
+Terminated
+killall: skygear-server: no process killed
+killall: skygear-server: no process killed
+[cmd] /boot exited 143
+[cont-finish.d] executing container finish scripts...
+[cont-finish.d] done.
+[s6-finish] syncing disks.
+[s6-finish] sending all processes the TERM signal.
+[s6-finish] sending all processes the KILL signal and exiting.

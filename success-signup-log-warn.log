@@ -1,0 +1,36 @@
+[s6-init] making user provided files available at /var/run/s6/etc...exited 0.
+[s6-init] ensuring user provided files have correct perms...exited 0.
+[fix-attrs.d] applying ownership & permissions fixes...
+[fix-attrs.d] 01-fix-perms: applying... 
+[fix-attrs.d] 01-fix-perms: exited 0.
+[fix-attrs.d] done.
+[cont-init.d] executing container initialization scripts...
+[cont-init.d] done.
+[services.d] starting services
+[services.d] done.
+2018/04/13 09:39:59 Error in loading .env file
+Listening 0.0.0.0 on port 9000...
+time="2018-04-13T09:39:59Z" level=info msg="Wait for all plugin configurations" count=2 logger=plugin
+time="2018-04-13T09:39:59Z" level=info msg="Sending init event to plugin" logger=plugin retry=0
+time="2018-04-13T09:39:59Z" level=info msg="Sending init event to plugin" logger=plugin retry=0
+time="2018-04-13T09:39:59Z" level=info msg="Get response from init" err="Post http://localhost:8000: dial tcp 127.0.0.1:8000: getsockopt: connection refused" logger=plugin out= plugin="&{0 0xc420d18480 map[]}"
+time="2018-04-13T09:39:59Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateError." logger=plugin
+time="2018-04-13T09:39:59Z" level=info msg="Get response from init" err="<nil>" logger=plugin out="{\"op\":[],\"event\":[{\"name\":\"init\"}],\"handler\":[{\"name\":\"static/\",\"methods\":[\"GET\"],\"user_required\":false},{\"name\":\"static/\",\"methods\":[\"POST\"],\"user_required\":false},{\"name\":\"static/\",\"methods\":[\"PUT\"],\"user_required\":false}],\"hook\":[],\"timer\":[],\"provider\":[]}" plugin="&{0 0xc420d18000 map[]}"
+time="2018-04-13T09:39:59Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateInitialized." logger=plugin
+2018-04-13 09:40:00,234 INFO  [skygear.bin:76][MainThread] Starting py-skygear(1.4.0)...
+2018-04-13 09:40:00,427 INFO  [werkzeug:88][MainThread]  * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
+time="2018-04-13T09:40:01Z" level=info msg="Sending init event to plugin" logger=plugin retry=1
+time="2018-04-13T09:40:01Z" level=info msg="Transport state changes from TransportStateError to TransportStateUninitialized." logger=plugin
+2018-04-13 09:40:01,941 INFO  [werkzeug:88][Thread-1] 127.0.0.1 - - [13/Apr/2018 09:40:01] "POST / HTTP/1.1" 200 -
+time="2018-04-13T09:40:01Z" level=info msg="Get response from init" err="<nil>" logger=plugin out="{\"op\": [{\"name\": \"user:forgot-password\", \"key_required\": false, \"user_required\": false}, {\"name\": \"user:forgot-password:test\", \"key_required\": true, \"user_required\": false}, {\"name\": \"user:reset-password\", \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/config\", \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/provider_profiles\", \"key_required\": false, \"user_required\": true}], \"handler\": [{\"name\": \"reset-password\", \"methods\": [\"GET\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"reset-password\", \"methods\": [\"POST\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"GET\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"POST\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"PUT\"], \"key_required\": false, \"user_required\": false}], \"hook\": [], \"timer\": [], \"event\": [{\"name\": \"init\"}], \"provider\": []}" plugin="&{1 0xc420d18480 map[]}"
+time="2018-04-13T09:40:01Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateInitialized." logger=plugin
+2018-04-13 09:40:01,974 WARNI [skygear.transmitter.common:114][Thread-2] Missing event func named "after-config"
+2018-04-13 09:40:01,975 INFO  [werkzeug:88][Thread-2] 127.0.0.1 - - [13/Apr/2018 09:40:01] "POST / HTTP/1.1" 200 -
+2018-04-13 09:40:01,998 WARNI [skygear.transmitter.common:114][Thread-3] Missing event func named "before-plugins-ready"
+2018-04-13 09:40:01,999 INFO  [werkzeug:88][Thread-3] 127.0.0.1 - - [13/Apr/2018 09:40:01] "POST / HTTP/1.1" 200 -
+time="2018-04-13T09:40:01Z" level=info msg="Transport state changes from TransportStateInitialized to TransportStateReady." logger=plugin
+time="2018-04-13T09:40:02Z" level=info msg="Transport state changes from TransportStateInitialized to TransportStateReady." logger=plugin
+2018-04-13 09:40:02,033 WARNI [skygear.transmitter.common:114][Thread-4] Missing event func named "after-plugins-ready"
+2018-04-13 09:40:02,034 INFO  [werkzeug:88][Thread-4] 127.0.0.1 - - [13/Apr/2018 09:40:02] "POST / HTTP/1.1" 200 -
+2018-04-13 09:40:02,058 WARNI [skygear.transmitter.common:114][Thread-5] Missing event func named "server-ready"
+2018-04-13 09:40:02,058 INFO  [werkzeug:88][Thread-5] 127.0.0.1 - - [13/Apr/2018 09:40:02] "POST / HTTP/1.1" 200 -

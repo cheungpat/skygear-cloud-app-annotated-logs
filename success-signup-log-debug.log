@@ -1,0 +1,88 @@
+[s6-init] making user provided files available at /var/run/s6/etc...exited 0.
+[s6-init] ensuring user provided files have correct perms...exited 0.
+[fix-attrs.d] applying ownership & permissions fixes...
+[fix-attrs.d] 01-fix-perms: applying... 
+[fix-attrs.d] 01-fix-perms: exited 0.
+[fix-attrs.d] done.
+[cont-init.d] executing container initialization scripts...
+[cont-init.d] done.
+[services.d] starting services
+[services.d] done.
+2018/04/13 04:19:37 Error in loading .env file
+time="2018-04-13T04:19:37Z" level=info msg="Starting Skygear Server(v1.4.0)..."
+time="2018-04-13T04:19:38Z" level=debug msg="Current version of database schema is \"b3163d49bd6d\"." logger=skydb
+time="2018-04-13T04:19:38Z" level=debug msg="Database schema \"b3163d49bd6d\" matches the latest schema \"b3163d49bd6d\"." logger=skydb
+time="2018-04-13T04:19:38Z" level=debug msg="Querying remoteColumnTypes user" logger=skydb
+time="2018-04-13T04:19:38Z" level=debug msg="Executed SQL with sql.QueryRowx" args="[user app_cheungpatapplog]" executionCount=1 logger=skydb sql="\nSELECT c.oid\nFROM pg_catalog.pg_class c\n     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace\nWHERE c.relname = $1\n  AND n.nspname = $2"
+time="2018-04-13T04:19:38Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[35455312]" error="<nil>" executionCount=2 logger=skydb sql="\nSELECT a.attname,\n  pg_catalog.format_type(a.atttypid, a.atttypmod)\nFROM pg_catalog.pg_attribute a\nWHERE a.attrelid = $1 AND a.attnum > 0 AND NOT a.attisdropped"
+time="2018-04-13T04:19:38Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[app_cheungpatapplog user]" error="<nil>" executionCount=3 logger=skydb sql="SELECT kcu.column_name, ccu.table_name FROM information_schema.table_constraints AS tc JOIN information_schema.key_column_usage AS kcu ON tc.constraint_name = kcu.constraint_name JOIN information_schema.constraint_column_usage AS ccu ON ccu.constraint_name = tc.constraint_name WHERE constraint_type = 'FOREIGN KEY' AND tc.table_schema = $1 AND tc.table_name = $2"
+time="2018-04-13T04:19:38Z" level=debug msg="Cache remoteColumnTypes user" logger=skydb
+time="2018-04-13T04:19:38Z" level=debug msg="Using cached remoteColumnTypes user" logger=skydb
+time="2018-04-13T04:19:38Z" level=debug msg="Executed SQL successfully with sql.Queryx" args="[app_cheungpatapplog user]" error="<nil>" executionCount=4 logger=skydb sql="\nSELECT\n    t.relname AS table_name,\n    i.relname AS index_name,\n    array_to_string(array_agg(a.attname), ',') AS column_names\nFROM\n    pg_class t,\n    pg_class i,\n    pg_index ix,\n    pg_attribute a,\n    pg_namespace ns\nWHERE\n    t.oid = ix.indrelid\n    AND i.oid = ix.indexrelid\n    AND ns.oid = t.relnamespace\n    AND ns.oid = i.relnamespace\n    AND a.attrelid = t.oid\n    AND a.attnum = ANY(ix.indkey)\n    AND t.relkind = 'r'\n    AND ix.indisunique = TRUE\n    AND ns.nspname = $1\n    AND t.relname = $2\nGROUP BY\n    ns.nspname,\n    t.relname,\n    i.relname;"
+time="2018-04-13T04:19:38Z" level=info msg="Subscription Service listening..."
+time="2018-04-13T04:19:38Z" level=debug msg="Executed SQL successfully with sql.Exec" args="[2018-04-12 04:19:38.088180383 +0000 UTC]" error="<nil>" executionCount=1 logger=skydb rowsAffected=0 sql="DELETE FROM \"app_cheungpatapplog\".\"_device\" WHERE token IS NULL AND last_registered_at < $1"
+time="2018-04-13T04:19:38Z" level=info msg="Created Cloud Asset Store" cloud-store="&{cheungpatapplog http://10.3.148.74 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRyYSI6eyJlbmRwb2ludCI6ImNoZXVuZ3BhdGFwcGxvZyJ9LCJqdGkiOiI4ZTIxYzQ4NS1iYTNjLTQ0MTctODNhMy1iODMwY2QyMzUxNTIiLCJpYXQiOjE1MjM1OTMxNzUsImlzcyI6IlNreWdlYXItQ2xvdWQiLCJzdWIiOiJza3lnZWFyLWNsb3VkLWFzc2V0LXRva2VuIn0.WMK7Ohx_tgdI5rhhh5DLsftO_gtyTLLoB-kmz07dqQU https://asset.skygeario.com/asset false 0xc42019ce10}" logger=asset
+time="2018-04-13T04:19:38Z" level=info msg="Supported plugin transports: exec, http"
+time="2018-04-13T04:19:38Z" level=info msg="Listening on :3000..."
+time="2018-04-13T04:19:38Z" level=info msg="Wait for all plugin configurations" count=2 logger=plugin
+time="2018-04-13T04:19:38Z" level=info msg="Start refresh Cloud Asset Signer Token" logger=asset
+time="2018-04-13T04:19:38Z" level=debug msg="Hub running 0xc420226c40" logger=pubsub
+time="2018-04-13T04:19:38Z" level=debug msg="Hub running 0xc420226700" logger=pubsub
+time="2018-04-13T04:19:38Z" level=info msg="Sending init event to plugin" logger=plugin retry=0
+time="2018-04-13T04:19:38Z" level=info msg="Sending init event to plugin" logger=plugin retry=0
+time="2018-04-13T04:19:38Z" level=info msg="Successfully got new Cloud Asset Signer Token" logger=asset response="{o8rhslzstIaxQyq9Oayc0lmDYtSOIxaTFSqjKS0R32k= MTUyMzYwMDM3OA== 2018-04-13 06:19:38 +0000 UTC}"
+time="2018-04-13T04:19:38Z" level=info msg="pq/listener: Received an event" event=0 logger=skydb
+time="2018-04-13T04:19:38Z" level=info msg="pq/listener: Listening to record_change..." logger=skydb
+time="2018-04-13T04:19:38Z" level=info msg="Get response from init" err="Post http://localhost:8000: dial tcp 127.0.0.1:8000: getsockopt: connection refused" logger=plugin out= plugin="&{0 0xc4204d4480 map[]}"
+time="2018-04-13T04:19:38Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateError." logger=plugin
+time="2018-04-13T04:19:38Z" level=info msg="Get response from init" err="Post http://localhost:9000: dial tcp 127.0.0.1:9000: getsockopt: connection refused" logger=plugin out= plugin="&{0 0xc4204d4900 map[]}"
+time="2018-04-13T04:19:38Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateError." logger=plugin
+2018-04-13 04:19:38,573 INFO  [skygear.bin:76][MainThread] Starting py-skygear(1.4.0)...
+Listening 0.0.0.0 on port 9000...
+2018-04-13 04:19:38,814 INFO  [werkzeug:88][MainThread]  * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
+time="2018-04-13T04:19:40Z" level=info msg="Sending init event to plugin" logger=plugin retry=1
+time="2018-04-13T04:19:40Z" level=info msg="Transport state changes from TransportStateError to TransportStateUninitialized." logger=plugin
+time="2018-04-13T04:19:40Z" level=info msg="Sending init event to plugin" logger=plugin retry=1
+time="2018-04-13T04:19:40Z" level=info msg="Transport state changes from TransportStateError to TransportStateUninitialized." logger=plugin
+2018-04-13 04:19:40,370 INFO  [werkzeug:88][Thread-1] 127.0.0.1 - - [13/Apr/2018 04:19:40] "POST / HTTP/1.1" 200 -
+time="2018-04-13T04:19:40Z" level=info msg="Get response from init" err="<nil>" logger=plugin out="{\"op\": [{\"name\": \"user:forgot-password\", \"key_required\": false, \"user_required\": false}, {\"name\": \"user:forgot-password:test\", \"key_required\": true, \"user_required\": false}, {\"name\": \"user:reset-password\", \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/config\", \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/provider_profiles\", \"key_required\": false, \"user_required\": true}], \"handler\": [{\"name\": \"reset-password\", \"methods\": [\"GET\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"reset-password\", \"methods\": [\"POST\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"GET\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"POST\"], \"key_required\": false, \"user_required\": false}, {\"name\": \"sso/iframe_handler\", \"methods\": [\"PUT\"], \"key_required\": false, \"user_required\": false}], \"hook\": [], \"timer\": [], \"event\": [{\"name\": \"init\"}], \"provider\": []}" plugin="&{1 0xc4204d4480 map[]}"
+time="2018-04-13T04:19:40Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateInitialized." logger=plugin
+time="2018-04-13T04:19:40Z" level=info msg="Get response from init" err="<nil>" logger=plugin out="{\"op\":[],\"event\":[{\"name\":\"init\"}],\"handler\":[{\"name\":\"static/\",\"methods\":[\"GET\"],\"user_required\":false},{\"name\":\"static/\",\"methods\":[\"POST\"],\"user_required\":false},{\"name\":\"static/\",\"methods\":[\"PUT\"],\"user_required\":false}],\"hook\":[],\"timer\":[],\"provider\":[]}" plugin="&{1 0xc4204d4900 map[]}"
+time="2018-04-13T04:19:40Z" level=info msg="Transport state changes from TransportStateUninitialized to TransportStateInitialized." logger=plugin
+2018-04-13 04:19:40,400 WARNI [skygear.transmitter.common:114][Thread-2] Missing event func named "after-config"
+2018-04-13 04:19:40,400 INFO  [werkzeug:88][Thread-2] 127.0.0.1 - - [13/Apr/2018 04:19:40] "POST / HTTP/1.1" 200 -
+2018-04-13 04:19:40,429 WARNI [skygear.transmitter.common:114][Thread-3] Missing event func named "before-plugins-ready"
+2018-04-13 04:19:40,429 INFO  [werkzeug:88][Thread-3] 127.0.0.1 - - [13/Apr/2018 04:19:40] "POST / HTTP/1.1" 200 -
+time="2018-04-13T04:19:40Z" level=info msg="Transport state changes from TransportStateInitialized to TransportStateReady." logger=plugin
+time="2018-04-13T04:19:40Z" level=info msg="Transport state changes from TransportStateInitialized to TransportStateReady." logger=plugin
+2018-04-13 04:19:40,453 WARNI [skygear.transmitter.common:114][Thread-4] Missing event func named "after-plugins-ready"
+2018-04-13 04:19:40,453 INFO  [werkzeug:88][Thread-4] 127.0.0.1 - - [13/Apr/2018 04:19:40] "POST / HTTP/1.1" 200 -
+2018-04-13 04:19:40,480 WARNI [skygear.transmitter.common:114][Thread-5] Missing event func named "server-ready"
+2018-04-13 04:19:40,481 INFO  [werkzeug:88][Thread-5] 127.0.0.1 - - [13/Apr/2018 04:19:40] "POST / HTTP/1.1" 200 -
+time="2018-04-13T04:20:00Z" level=debug msg="GET /_status/healthz" logger=router
+time="2018-04-13T04:20:00Z" level=debug msg="------ Header: ------" logger=router
+time="2018-04-13T04:20:00Z" level=debug msg="User-Agent: [kube-probe/1.9]" logger=router
+time="2018-04-13T04:20:00Z" level=debug msg="Accept-Encoding: [gzip]" logger=router
+time="2018-04-13T04:20:00Z" level=debug msg="Connection: [close]" logger=router
+time="2018-04-13T04:20:00Z" level=debug msg="------ Request: ------" logger=router
+time="2018-04-13T04:20:00Z" level=debug msg="0 bytes of request body" logger=router
+time="2018-04-13T04:20:00Z" level=debug msg="------ Response: ------" logger=router
+time="2018-04-13T04:20:00Z" level=debug msg="{\"result\":{\"status\":\"OK\"}}\n" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="GET /_status/healthz" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="------ Header: ------" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="User-Agent: [kube-probe/1.9]" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="Accept-Encoding: [gzip]" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="Connection: [close]" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="------ Request: ------" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="0 bytes of request body" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="------ Response: ------" logger=router
+time="2018-04-13T04:20:20Z" level=debug msg="{\"result\":{\"status\":\"OK\"}}\n" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="GET /_status/healthz" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="------ Header: ------" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="User-Agent: [kube-probe/1.9]" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="Accept-Encoding: [gzip]" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="Connection: [close]" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="------ Request: ------" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="0 bytes of request body" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="------ Response: ------" logger=router
+time="2018-04-13T04:20:40Z" level=debug msg="{\"result\":{\"status\":\"OK\"}}\n" logger=router
